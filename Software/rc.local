@@ -1,0 +1,31 @@
+#!/bin/bash
+#This is the settings for automatic initiation of the flight software right after power is on
+
+sudo /home/pi/Desktop/TURKSAT/lowGpio
+
+sleep 30
+
+sudo raspivid -o - -t 0 -w 800 -h 400 -fps 24 | tee /home/pi/live_stream.h264 | cvlc -v stream:///dev/stdin --sout '#standard{access=http, mux=ts, dest=:8160' :demux=h264 &
+sudo /usr/bin/python3 /home/pi/Desktop/TURKSAT/Commands.py &
+sudo /home/pi/Desktop/TURKSAT/bip
+
+sleep 20
+
+#sudo /home/pi/Desktop/TURKSAT/bip
+sudo /usr/bin/python3 /home/pi/Desktop/TURKSAT/Python_Client.py &       #After second beep (35 sec) ground station will be initialized
+
+#Code initializations
+sudo /home/pi/Desktop/TURKSAT/bno055 &
+sudo /home/pi/Desktop/TURKSAT/gps &
+sudo /home/pi/Desktop/TURKSAT/ms5611 &
+sudo /home/pi/Desktop/TURKSAT/ina219/ina219 &
+sudo /home/pi/Desktop/TURKSAT/Flight_Software &
+sudo /home/pi/Desktop/TURKSAT/Vertical_Stabilization &
+sudo /home/pi/Desktop/TURKSAT/Yaw_Stabilization &
+sudo /home/pi/Desktop/TURKSAT/Descent_Velocity
+
+sleep 10
+
+#sudo /usr/bin/python3 /home/pi/Desktop/TURKSAT/Commands.py &
+
+exit 0
