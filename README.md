@@ -11,3 +11,5 @@ PID controller design for payload.
 Motor-ESC-Battery selections and calibrations.
 Minimalistic electronic subsystem design with just 135g including batteries, circuitry, camera, antenna, cables, sensors and microcontroller.
 Fog capsule system design for better observation and monitoring of payload during flight.
+
+First successful flight: https://youtube.com/shorts/06bCFZil8Dg
